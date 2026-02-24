@@ -20,6 +20,10 @@
         .particle{position:absolute;width:2px;height:2px;background:var(--p);border-radius:50%;animation:pF linear infinite;opacity:0}
         @keyframes pF{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-10vh) scale(1)}}
 
+        /* LOGO STYLES */
+        .logo-img {height: 32px; object-fit: contain; cursor: pointer; filter: drop-shadow(0 0 8px rgba(16,185,129,0.4));}
+        .logo-img-large {height: 60px; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 0 12px rgba(16,185,129,0.5));}
+
         /* LOGIN */
         .login-page{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:var(--dark);transition:opacity .5s,visibility .5s}
         .login-page.hidden{opacity:0;visibility:hidden;pointer-events:none}
@@ -28,8 +32,6 @@
         .login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p),var(--g),var(--p));background-size:200% 100%;animation:shimmer 3s linear infinite}
         @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
         .login-logo{text-align:center;margin-bottom:8px}
-        .login-logo h1{font-family:'Orbitron',sans-serif;font-size:52px;font-weight:900;letter-spacing:4px}
-        .login-logo h1 span{color:var(--g)}
         .login-sub{text-align:center;color:var(--ts);font-size:13px;margin-bottom:40px;letter-spacing:3px;text-transform:uppercase;font-weight:500}
         .login-msg{padding:14px 18px;border-radius:var(--rs);font-size:13px;margin-bottom:16px;display:none;align-items:center;gap:10px;animation:fadeUp .3s ease}
         .login-msg.show{display:flex}
@@ -56,7 +58,6 @@
         header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
         header.scrolled{background:rgba(10,10,15,.95);box-shadow:0 4px 30px rgba(0,0,0,.5)}
         .h-bar{max-width:1400px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-        .logo{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--t);text-decoration:none;letter-spacing:3px;flex-shrink:0;cursor:pointer}.logo span{color:var(--g)}
         .nav{display:flex;align-items:center;gap:6px}
         .nav a{color:var(--ts);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .3s;white-space:nowrap;cursor:pointer}
         .nav a:hover,.nav a.active{color:var(--t);background:rgba(124,58,237,.15)}
@@ -381,7 +382,7 @@
         @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateX(100px)}}
 
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
-        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.logo{font-size:24px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.login-logo h1{font-size:40px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
+        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
         @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}.ar-title{font-size:22px}}
     </style>
 </head>
@@ -390,11 +391,12 @@
 <div class="particles" id="particles"></div>
 <div class="toast-box" id="toastBox"></div>
 
-<!-- LOGIN -->
 <div class="login-page" id="loginPage">
 <div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 <div class="login-wrap"><div class="login-card">
-<div class="login-logo"><h1>GG<span>.</span></h1></div>
+<div class="login-logo">
+    <img src="https://placehold.co/250x60/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img-large">
+</div>
 <p class="login-sub">Global Games Portal</p>
 <div class="login-msg" id="loginMsg"></div>
 <button class="g-btn" id="googleBtn" onclick="loginWithGoogle()"><div class="spinner"></div><svg class="g-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span class="g-text">Continuar com Google</span></button>
@@ -404,14 +406,26 @@
 <p class="login-footer">Ao continuar, concorda com nossos <a href="#">Termos</a> e <a href="#">Privacidade</a></p>
 </div></div></div>
 
-<!-- MOBILE -->
 <div class="mob-overlay" id="mobOverlay" onclick="closeMob()"></div>
-<div class="mob-side" id="mobSide"><button class="m-close" onclick="closeMob()">✕</button><div style="margin-top:8px;text-align:center"><span class="logo">GG<span>.</span></span></div><div class="m-nav"><a onclick="goPage('home');closeMob()">🏠 Início</a><a onclick="goToTrending();closeMob()">🔥 Em Alta</a><a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Admin</a><div class="m-div"></div><a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a></div></div>
+<div class="mob-side" id="mobSide">
+    <button class="m-close" onclick="closeMob()">✕</button>
+    <div style="margin-top:8px;text-align:center">
+        <img src="https://placehold.co/180x50/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img">
+    </div>
+    <div class="m-nav">
+        <a onclick="goPage('home');closeMob()">🏠 Início</a>
+        <a onclick="goToTrending();closeMob()">🔥 Em Alta</a>
+        <a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Admin</a>
+        <div class="m-div"></div>
+        <a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a>
+    </div>
+</div>
 
-<!-- HEADER -->
 <header id="header"><div class="h-bar">
 <button class="mob-btn" onclick="openMob()">☰</button>
-<a class="logo" onclick="goPage('home')">GG<span>.</span></a>
+<a onclick="goPage('home')" style="display: flex; align-items: center;">
+    <img src="https://placehold.co/180x40/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img">
+</a>
 <nav class="nav">
     <a onclick="goPage('home')" class="active" id="navHome">Início</a>
     <a onclick="goToTrending()" id="navTrending">🔥 Em Alta</a>
@@ -424,7 +438,6 @@
 <div class="u-dd" id="uDD"><div class="dd-head"><div class="dd-av" id="ddAv">V</div><div><div class="dd-n" id="ddN">Visitante</div><div class="dd-e" id="ddE">Não logado</div></div></div><a onclick="goPage('home')">🏠 Início</a><div id="ddAdminLink"></div><div class="dd-div"></div><div id="ddAuth"></div></div>
 </div></div></div></header>
 
-<!-- HOME -->
 <div class="page" id="homePage"><main>
 <div class="v-ban" id="vBanner"><div class="v-ban-text"><span>👁️</span><span>Modo <strong>visitante</strong>. Faça login para tudo!</span></div><div style="display:flex;gap:10px"><button class="v-login" onclick="goLogin()">Login</button><button class="v-x" onclick="this.closest('.v-ban').classList.remove('show')">✕</button></div></div>
 <section class="hero"><div class="hero-card" id="heroCard" onclick="clickHero()"><div class="hero-cover" id="heroCover"></div><div class="hero-fx"><div class="hero-grid"></div><div class="hero-glow p"></div><div class="hero-glow g"></div></div>
@@ -435,12 +448,13 @@
 <div class="news-grid" id="newsGrid"></div><div class="empty-state" id="emptyNews" style="display:none"><span>📭</span><p>Nenhuma notícia publicada.</p></div></section>
 <section class="trending" id="trendingSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
 </main>
-<footer><div class="f-wrap"><div class="f-top"><div class="f-brand"><span class="logo">GG<span>.</span></span><p>Sua fonte definitiva de notícias gamer.</p></div><div class="f-links"><h4>Navegação</h4><a onclick="goPage('home')" style="cursor:pointer">Início</a><a onclick="goToTrending()" style="cursor:pointer">🔥 Em Alta</a><a onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">Notícias</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
+<footer><div class="f-wrap"><div class="f-top"><div class="f-brand">
+    <img src="https://placehold.co/150x40/0a0a0f/10b981/png?text=GLOBAL+GAMES&font=Orbitron" alt="Global Games" class="logo-img" style="margin-bottom: 8px;">
+    <p>Sua fonte definitiva de notícias gamer.</p>
+</div><div class="f-links"><h4>Navegação</h4><a onclick="goPage('home')" style="cursor:pointer">Início</a><a onclick="goToTrending()" style="cursor:pointer">🔥 Em Alta</a><a onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">Notícias</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
 
-<!-- ARTICLE READER -->
 <div class="page" id="articlePage"><div class="article-reader" id="articleReader"></div></div>
 
-<!-- ADMIN -->
 <div class="page" id="adminPage"><div class="admin-layout">
 <aside class="admin-side"><div class="admin-side-header"><h3>⚙️ ADMIN</h3><p>Painel de Controle</p></div>
 <nav class="admin-nav" id="adminNav">
@@ -493,7 +507,6 @@
 <div style="display:flex;gap:12px"><button class="a-btn" onclick="saveArticle()">💾 Salvar</button><button class="a-btn secondary" onclick="resetForm();adminTab('articles')">Cancelar</button></div>
 </div></div></div>
 
-<!-- COMMENTS ADMIN PANEL -->
 <div class="admin-panel" id="ap-comments">
 <div class="admin-section">
     <h3>💬 Aprovação de Comentários</h3>
@@ -545,7 +558,6 @@ const DB={g:(k,d)=>{try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catc
     if(!DB.g('views',null))DB.s('views',{});
     if(!DB.g('comments',null))DB.s('comments',[]);
 })();
-
 // PARTICLES
 (function(){const c=document.getElementById('particles');for(let i=0;i<20;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*15+10)+'s';p.style.animationDelay=(Math.random()*15)+'s';const s=(Math.random()*3+1)+'px';p.style.width=s;p.style.height=s;if(Math.random()>.5)p.style.background='#10b981';c.appendChild(p)}})();
 
@@ -848,7 +860,6 @@ function saveCat(){
     cats.push({id:Date.now(),name:n,icon:document.getElementById('catIcon').value||'📂',color:document.getElementById('catColor').value,image:imgSrc&&imgSrc.startsWith('data:')?imgSrc:''});
     DB.s('cats',cats);
     document.getElementById('catName').value='';document.getElementById('catIcon').value='';
-    // reset cat img
     document.getElementById('catImgPrev').src='';document.getElementById('catImgUp').classList.remove('has-image');
     toast('Criada! 📂','success');renderCatsAdmin();render();updateStats()
 }
@@ -889,7 +900,6 @@ document.getElementById('searchInput')?.addEventListener('keypress',e=>{if(e.key
 
 // URL TOKEN
 (function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname);const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
-
 // SESSION
 (function(){if(location.hash&&location.hash.includes('access_token'))return;const mode=DB.g('mode',''),saved=DB.g('user',null);if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);render()}else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();render()}else render()})();
 </script>
