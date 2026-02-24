@@ -385,6 +385,26 @@
         @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateX(100px)}}
         @keyframes loadBar{0%{width:0%;margin-left:0}50%{width:100%}100%{width:0%;margin-left:100%}}
 
+        /* NOVIDADES */
+        .nov-scroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}.nov-scroll::-webkit-scrollbar{display:none}
+        .nov-card{flex:0 0 240px;background:var(--gc);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s;position:relative}
+        .nov-card:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.4);box-shadow:0 12px 40px rgba(16,185,129,.12)}
+        .nov-img{position:relative;height:140px;overflow:hidden}
+        .nov-badge{position:absolute;top:10px;right:10px;padding:4px 10px;background:linear-gradient(135deg,#10b981,#34d399);border-radius:20px;font-size:10px;font-weight:800;color:#000;letter-spacing:1px;text-transform:uppercase}
+        .nov-body{padding:14px}
+        .nov-title{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .nov-card:hover .nov-title{color:var(--g)}
+        .nov-time{font-size:11px;color:var(--tm)}
+
+        /* LIKE BUTTON */
+        .like-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:14px;color:var(--ts);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+        .like-btn:hover{border-color:rgba(239,68,68,.4);color:#fca5a5;background:rgba(239,68,68,.08);transform:translateY(-2px)}
+        .like-btn.liked{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);color:#fca5a5}
+        .like-btn .like-count{font-weight:800;font-size:15px}
+
+        /* RECS */
+        .rec-tag-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:20px;font-size:11px;color:var(--gl);font-weight:600;margin-bottom:8px}
+
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
         @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
         @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}.ar-title{font-size:22px}}
@@ -453,9 +473,22 @@
 <div class="hero-stats"><div class="hero-stat"><div class="hero-stat-v" id="statArticles">0</div><div class="hero-stat-l">Matérias</div></div><div class="hero-stat"><div class="hero-stat-v" id="statViews">0</div><div class="hero-stat-l">Views Total</div></div></div>
 <div class="hero-content"><div class="hero-badge"><span class="pulse"></span>DESTAQUE</div><h1 class="hero-title" id="heroTitle">BEM-VINDO AO GG.</h1><p class="hero-desc" id="heroDesc">Seu portal gamer.</p><div class="hero-actions"><button class="btn-p" onclick="event.stopPropagation();document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})">🎮 EXPLORAR</button><button class="btn-s" onclick="event.stopPropagation();goToTrending()">🔥 EM ALTA</button></div></div></div></section>
 <div class="cats" id="catsStrip"></div>
+
+<section id="novidadesSection" style="display:none;margin-bottom:48px">
+<div class="sec-h"><div class="sec-t"><div class="bar" style="background:linear-gradient(135deg,#10b981,#34d399)"></div><h2>✨ NOVIDADES</h2><span class="cnt" style="background:rgba(16,185,129,.2);color:var(--g)" id="novidadesCount">0</span></div><span style="font-size:12px;color:var(--tm)">Últimas 72h</span></div>
+<div class="nov-scroll" id="novidadesList"></div>
+</section>
+
 <section id="newsSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>RADAR GAMER</h2><span class="cnt" id="newsCount">0</span></div><a class="see-all" onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})">Ver todas →</a></div>
 <div class="news-grid" id="newsGrid"></div><div class="empty-state" id="emptyNews" style="display:none"><span>📭</span><p>Nenhuma notícia publicada.</p></div></section>
+
 <section class="trending" id="trendingSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
+
+<section id="recsSection" style="display:none;margin-top:48px">
+<div class="sec-h"><div class="sec-t"><div class="bar" style="background:linear-gradient(135deg,#a855f7,#7c3aed)"></div><h2>⭐ RECOMENDADO PARA VOCÊ</h2></div></div>
+<div style="margin-bottom:16px;font-size:13px;color:var(--tm)">Baseado nas suas curtidas <span id="recTagsLabel"></span></div>
+<div class="news-grid" id="recsList"></div>
+</section>
 </main>
 <footer><div class="f-wrap"><div class="f-top"><div class="f-brand">
     <img src="assets/logo.png" alt="Global Games" class="logo-img" style="margin-bottom: 8px;">
@@ -478,7 +511,16 @@
 <a onclick="goPage('home')"><span class="an">🏠</span>Voltar</a>
 </nav></aside>
 <div class="admin-main">
-<div class="admin-panel active" id="ap-overview"><div class="admin-welcome"><h2>👋 Painel Admin</h2><p>Gerencie seu portal gamer.</p></div><div class="admin-stats"><div class="a-stat"><div class="a-stat-val" id="aStatArt">0</div><div class="a-stat-label">Matérias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatCat">0</div><div class="a-stat-label">Categorias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatTag">0</div><div class="a-stat-label">Tags</div></div><div class="a-stat"><div class="a-stat-val" id="aStatViews">0</div><div class="a-stat-label">Views Total</div></div></div><div class="admin-section"><h3>📰 Últimas Matérias</h3><div class="table-scroll" id="overviewTable"></div></div></div>
+<div class="admin-panel active" id="ap-overview"><div class="admin-welcome"><h2>👋 Painel Admin</h2><p>Gerencie seu portal gamer.</p></div>
+<div id="migrationBox" style="display:none;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(124,58,237,.08));border:1px solid rgba(16,185,129,.3);border-radius:16px;padding:24px;margin-bottom:24px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:24px">📦</span><div><strong style="font-size:15px">Matérias encontradas no seu navegador!</strong><p style="font-size:13px;color:var(--ts);margin-top:2px">Clique para migrar tudo para o Firebase e tornar visível para todos.</p></div></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<button onclick="runMigration()" style="padding:12px 28px;background:linear-gradient(135deg,#10b981,#34d399);border:none;border-radius:10px;color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">🚀 Migrar para Firebase</button>
+<button onclick="document.getElementById('migrationBox').style.display='none'" style="padding:12px 20px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--ts);font-size:14px;cursor:pointer;font-family:'Inter',sans-serif">Ignorar</button>
+</div>
+<div id="migrationStatus" style="margin-top:12px;font-size:13px;color:var(--ts);display:none"></div>
+</div>
+<div class="admin-stats"><div class="a-stat"><div class="a-stat-val" id="aStatArt">0</div><div class="a-stat-label">Matérias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatCat">0</div><div class="a-stat-label">Categorias</div></div><div class="a-stat"><div class="a-stat-val" id="aStatTag">0</div><div class="a-stat-label">Tags</div></div><div class="a-stat"><div class="a-stat-val" id="aStatViews">0</div><div class="a-stat-label">Views Total</div></div></div><div class="admin-section"><h3>📰 Últimas Matérias</h3><div class="table-scroll" id="overviewTable"></div></div></div>
 
 <div class="admin-panel" id="ap-articles"><div class="admin-section"><h3>📰 Matérias <button class="a-btn" style="margin-left:auto;padding:8px 20px;font-size:12px" onclick="adminTab('new-article')">+ Nova</button></h3><div class="table-scroll" id="articlesTable"></div></div></div>
 
@@ -578,7 +620,7 @@ const firebaseConfig = {
 };
 // ===========================
 
-const SHARED = ['articles','cats','tags','settings','comments','views','pages'];
+const SHARED = ['articles','cats','tags','settings','comments','views','pages','likes'];
 const ARRAY_KEYS = new Set(['articles','cats','comments','pages']);
 const cache = {};
 window._fbReady = false;
@@ -602,7 +644,7 @@ const DEFAULTS = {
     tags:['FPS','RPG','MOBA','Battle Royale','Ação','Aventura'],
     articles:[],pages:[],
     settings:{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''},
-    views:{},comments:[]
+    views:{},comments:[],likes:{}
 };
 
 function initLocalFallback(){
@@ -682,7 +724,7 @@ function getTotalViews(){const v=DB.g('views',{});return Object.values(v).reduce
 function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'k';return n}
 
 // RENDER
-function render(){renderCats();renderNews();renderTrending();renderHero();updateStats();updateNotifBadge()}
+function render(){renderCats();renderNovidades();renderNews();renderTrending();renderRecomendacoes();renderHero();updateStats();updateNotifBadge()}
 
 function renderCats(){
     const cats=DB.g('cats',[]);
@@ -729,6 +771,86 @@ function renderTrending(){
 
 function renderHero(){const s=DB.g('settings',{});document.getElementById('heroTitle').textContent=s.heroTitle||'BEM-VINDO AO GG.';document.getElementById('heroDesc').textContent=s.heroDesc||'Seu portal gamer.';const c=document.getElementById('heroCover');if(s.heroImage){c.style.backgroundImage=`url(${s.heroImage})`;c.style.opacity='.35'}else{c.style.backgroundImage='';c.style.opacity='0'}document.title=s.siteName||'GG.'}
 
+// NOVIDADES — últimas 72h
+function renderNovidades(){
+    const THREE_DAYS=3*24*60*60*1000,now=Date.now();
+    const arts=DB.g('articles',[]).filter(a=>a.status==='published'&&(now-a.id)<=THREE_DAYS).sort((a,b)=>b.id-a.id);
+    const sec=document.getElementById('novidadesSection');
+    if(!arts.length){sec.style.display='none';return}
+    sec.style.display='block';
+    document.getElementById('novidadesCount').textContent=arts.length;
+    const cats=DB.g('cats',[]);
+    document.getElementById('novidadesList').innerHTML=arts.map(a=>{
+        const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
+        const img=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}" style="width:100%;height:100%;object-fit:cover">`:`<div class="ph ${cat.color}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px">${cat.icon}</div>`;
+        return`<div class="nov-card" onclick="openArticle(${a.id})">
+            <div class="nov-img">${img}<span class="nov-badge">✨ NOVO</span><span class="n-cat ${cat.color}" style="position:absolute;bottom:10px;left:10px;font-size:10px">${cat.name}</span></div>
+            <div class="nov-body"><h4 class="nov-title">${a.title}</h4><p class="nov-time">⏰ ${timeAgo(a.id)} · ⏱️ ${a.readTime||'3 min'}</p></div>
+        </div>`
+    }).join('');
+}
+
+// LIKES SYSTEM
+function getLikes(id){return DB.g('likes',{})[id]||0}
+function isLiked(id){
+    if(!cUser)return false;
+    const key='liked_'+cUser.email.replace(/[^a-z0-9]/g,'_');
+    return(DB.g(key,[])).includes(id)
+}
+function toggleLike(id,e){
+    if(e)e.stopPropagation();
+    if(!cUser){toast('Faça login para curtir! 🔑','info');goLogin();return}
+    const key='liked_'+cUser.email.replace(/[^a-z0-9]/g,'_');
+    const userLikes=DB.g(key,[]);
+    const likes=DB.g('likes',{});
+    const liked=userLikes.includes(id);
+    if(liked){userLikes.splice(userLikes.indexOf(id),1);likes[id]=Math.max(0,(likes[id]||1)-1)}
+    else{userLikes.push(id);likes[id]=(likes[id]||0)+1}
+    DB.s(key,userLikes);
+    DB.s('likes',likes);
+    updateLikeBtn(id);
+    renderRecomendacoes();
+}
+function updateLikeBtn(id){
+    const btn=document.getElementById('likeBtn_'+id);if(!btn)return;
+    const liked=isLiked(id),count=getLikes(id);
+    btn.className='like-btn'+(liked?' liked':'');
+    btn.innerHTML=`${liked?'❤️':'🤍'} ${liked?'Curtido':'Curtir'} <span class="like-count">${count>0?formatNum(count):''}</span>`;
+}
+
+// RECOMENDAÇÕES — baseado em curtidas e tags
+function renderRecomendacoes(){
+    const sec=document.getElementById('recsSection');
+    if(!cUser){sec.style.display='none';return}
+    const key='liked_'+cUser.email.replace(/[^a-z0-9]/g,'_');
+    const userLikes=DB.g(key,[]);
+    const allArts=DB.g('articles',[]).filter(a=>a.status==='published');
+    const likedArts=allArts.filter(a=>userLikes.includes(a.id));
+    const tagCounts={};
+    likedArts.forEach(a=>(a.tags||[]).forEach(t=>{tagCounts[t]=(tagCounts[t]||0)+1}));
+    const topTags=Object.keys(tagCounts).sort((a,b)=>tagCounts[b]-tagCounts[a]).slice(0,5);
+    if(!topTags.length){sec.style.display='none';return}
+    const scored=allArts.filter(a=>!userLikes.includes(a.id)).map(a=>{
+        const score=(a.tags||[]).reduce((s,t)=>s+(tagCounts[t]||0),0);
+        return{...a,score}
+    }).filter(a=>a.score>0).sort((a,b)=>b.score-a.score).slice(0,6);
+    if(!scored.length){sec.style.display='none';return}
+    sec.style.display='block';
+    document.getElementById('recTagsLabel').innerHTML=topTags.map(t=>`<span class="rec-tag-chip">🏷️ ${t}</span>`).join(' ');
+    const cats=DB.g('cats',[]);
+    document.getElementById('recsList').innerHTML=scored.map(a=>{
+        const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};
+        const img=a.coverImage?`<img class="cover-img" src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
+        const matchTags=(a.tags||[]).filter(t=>tagCounts[t]).slice(0,2);
+        const views=getViews(a.id);
+        return`<article class="n-card" onclick="openArticle(${a.id})">
+            <div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''}</div>
+            <div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${matchTags.map(t=>`<span class="rec-tag-chip">🏷️ ${t}</span>`).join('')}</div>
+            </div></article>`
+    }).join('');
+}
+
 function clickHero(){const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);if(arts.length)openArticle(arts[0].id)}
 
 // OPEN ARTICLE (READER)
@@ -760,6 +882,12 @@ function openArticle(id){
     ${a.excerpt?`<p class="ar-excerpt">${a.excerpt}</p>`:''}
     <div class="ar-content">${a.content||'<p>Sem conteúdo.</p>'}</div>
     ${contentImgHTML}${tagsHTML}
+    <div style="display:flex;align-items:center;gap:16px;margin:24px 0;padding:24px;background:var(--gc);border:1px solid var(--border);border-radius:16px">
+        <button id="likeBtn_${id}" class="like-btn${isLiked(id)?' liked':''}" onclick="toggleLike(${id},event)">
+            ${isLiked(id)?'❤️':'🤍'} ${isLiked(id)?'Curtido':'Curtir'} <span class="like-count">${getLikes(id)>0?formatNum(getLikes(id)):''}</span>
+        </button>
+        <span style="font-size:13px;color:var(--tm)">${isLiked(id)?'Obrigado pela curtida! Suas recomendações foram atualizadas ⭐':'Curtiu? Isso melhora suas recomendações!'}</span>
+    </div>
     <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>
     ${commentsHTML}`;
     
@@ -837,12 +965,63 @@ function updateNotifBadge(){
     if(pending>0){badge.textContent=pending;badge.style.display='flex'}
     else badge.style.display='none';
 }
+function checkAdminNotif(){if(isAdm){goPage('admin');adminTab('comments',document.getElementById('commentsNavLink'))}}
 function updatePendingBadge(){
     const pending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
     const badge=document.getElementById('pendingBadge');
     if(badge){if(pending>0){badge.textContent=pending;badge.style.display='inline-block'}else badge.style.display='none'}
 }
-function checkAdminNotif(){if(isAdm){goPage('admin');adminTab('comments',document.getElementById('commentsNavLink'))}}
+function checkMigration(){
+    if(!window._fbReady)return;
+    const keys=['articles','cats','tags','settings','comments','views','pages'];
+    let hasLocal=false;
+    for(const k of keys){
+        try{const v=localStorage.getItem('gg_'+k);if(v){const parsed=JSON.parse(v);if(Array.isArray(parsed)&&parsed.length>0){hasLocal=true;break}if(k==='articles'&&parsed&&parsed.length>0){hasLocal=true;break}}}catch(e){}
+    }
+    // Check specifically for articles
+    try{const arts=JSON.parse(localStorage.getItem('gg_articles')||'[]');if(arts.length>0)hasLocal=true;}catch(e){}
+    const box=document.getElementById('migrationBox');
+    if(box)box.style.display=hasLocal?'block':'none';
+}
+
+async function runMigration(){
+    if(!window._fbReady){toast('Firebase não conectado!','error');return}
+    const btn=document.querySelector('#migrationBox button');
+    const status=document.getElementById('migrationStatus');
+    btn.textContent='⏳ Migrando...';btn.disabled=true;
+    status.style.display='block';status.textContent='Lendo dados locais...';
+    const keys=['articles','cats','tags','settings','comments','views','pages'];
+    let count=0;
+    try{
+        const db=firebase.database();
+        for(const k of keys){
+            try{
+                const raw=localStorage.getItem('gg_'+k);
+                if(!raw)continue;
+                const val=JSON.parse(raw);
+                const isEmpty=Array.isArray(val)&&val.length===0;
+                if(isEmpty)continue;
+                status.textContent=`Enviando ${k}...`;
+                await db.ref(k).set(val);
+                cache[k]=val;
+                count++;
+            }catch(e){console.warn('Skip',k,e)}
+        }
+        // Also migrate views
+        try{
+            const vRaw=localStorage.getItem('gg_views');
+            if(vRaw){const v=JSON.parse(vRaw);await db.ref('views').set(v);cache['views']=v;count++;}
+        }catch(e){}
+        status.innerHTML=`<span style="color:#10b981">✅ Migração concluída! ${count} conjuntos de dados enviados ao Firebase.</span>`;
+        btn.textContent='✅ Concluído!';
+        toast('Matérias migradas com sucesso! 🎉','success');
+        setTimeout(()=>{document.getElementById('migrationBox').style.display='none';render();refreshAdmin();},3000);
+    }catch(err){
+        status.innerHTML=`<span style="color:#ef4444">❌ Erro: ${err.message}</span>`;
+        btn.textContent='🚀 Tentar novamente';btn.disabled=false;
+        toast('Erro na migração','error');
+    }
+}
 
 function filterComments(filter,el){
     commentFilter=filter;
@@ -880,11 +1059,61 @@ function approveComment(id){const cs=DB.g('comments',[]);const idx=cs.findIndex(
 function rejectComment(id){const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;cs[idx].approved=false;cs[idx].rejected=true;DB.s('comments',cs);toast('Comentário rejeitado.','info');renderCommentsAdmin();updateNotifBadge()}
 function deleteComment(id){if(!confirm('Deletar permanentemente?'))return;DB.s('comments',DB.g('comments',[]).filter(c=>c.id!==id));toast('Removido.','info');renderCommentsAdmin();updateNotifBadge()}
 
+// MIGRATION
+function checkMigration(){
+    const box=document.getElementById('migrationBox');if(!box)return;
+    if(!window._fbReady){box.style.display='none';return}
+    try{
+        const local=JSON.parse(localStorage.getItem('gg_articles')||'[]');
+        if(!Array.isArray(local)||!local.length){box.style.display='none';return}
+        const fbArts=DB.g('articles',[]);
+        const newOnes=local.filter(a=>!fbArts.find(f=>f.id===a.id));
+        if(newOnes.length>0){
+            box.style.display='block';
+            box.querySelector('strong').textContent=`${newOnes.length} matéria(s) encontrada(s) no seu navegador!`;
+        }else box.style.display='none';
+    }catch(e){box.style.display='none'}
+}
+async function runMigration(){
+    const status=document.getElementById('migrationStatus');
+    const btn=document.querySelector('#migrationBox button');
+    if(btn){btn.disabled=true;btn.textContent='⏳ Migrando...'}
+    status.style.display='block';status.style.color='var(--ts)';status.textContent='⏳ Buscando dados locais...';
+    try{
+        const KEYS=['articles','cats','tags','settings','pages','comments','views'];
+        let migrated=0;
+        for(const k of KEYS){
+            try{
+                const local=JSON.parse(localStorage.getItem('gg_'+k)||'null');
+                if(local===null)continue;
+                const current=cache[k];
+                let merged=local;
+                if(['articles','comments','pages'].includes(k)){
+                    const la=Array.isArray(local)?local:[];
+                    const ca=Array.isArray(current)?current:[];
+                    const ids=new Set(ca.map(x=>x.id));
+                    merged=[...ca,...la.filter(x=>!ids.has(x.id))];
+                    migrated+=la.filter(x=>!ids.has(x.id)).length;
+                }else if(k==='views'){
+                    merged={...(local||{}),...(current||{})};
+                }
+                cache[k]=merged;
+                await firebase.database().ref(k).set(merged);
+            }catch(er){}
+        }
+        status.textContent=`✅ ${migrated} item(ns) migrado(s) com sucesso! Visíveis para todos agora.`;
+        status.style.color='#6ee7b7';
+        render();
+        setTimeout(()=>{document.getElementById('migrationBox').style.display='none'},4000);
+    }catch(e){
+        status.textContent='❌ Erro na migração: '+e.message;
+        status.style.color='#fca5a5';
+        if(btn){btn.disabled=false;btn.textContent='🚀 Tentar novamente'}
+    }
+}
 function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
-
-// ADMIN
 function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin();if(tab==='comments'){commentFilter='pending';document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));document.getElementById('filterPending').classList.add('active');renderCommentsAdmin()}}
-function refreshAdmin(){updateStats();renderOverview();loadCatSel();updateNotifBadge();updatePendingBadge()}
+function refreshAdmin(){updateStats();renderOverview();loadCatSel();updateNotifBadge();updatePendingBadge();checkMigration()}
 function updateStats(){document.getElementById('aStatArt').textContent=DB.g('articles',[]).length;document.getElementById('aStatCat').textContent=DB.g('cats',[]).length;document.getElementById('aStatTag').textContent=DB.g('tags',[]).length;document.getElementById('aStatViews').textContent=formatNum(getTotalViews())}
 function loadCatSel(){document.getElementById('artCat').innerHTML=DB.g('cats',[]).map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}
 
